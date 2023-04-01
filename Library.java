@@ -8,6 +8,28 @@ public class Library extends Building {
   private Hashtable<String, Boolean> collection;
   private boolean hasElevator;
 
+  /*Default constructor */
+  public Library(){
+    this("<Name Unknown>", "<Address Unknown>", 1, false);
+  }
+
+  /* Overloaded constructor with name only */
+  public Library(String name){
+    this();
+    this.name = name;
+  }
+
+  /* Overloaded constructor with address and name only */
+  public Library(String name, String address){
+    this(name, address, 1, false);
+  }
+
+  /* Overloaded constructor with address, name, and number of floors only */
+  public Library(String name, String address, int nFloors){
+    this(name, address, nFloors, false);
+  }
+
+  /* Full constructor */
   public Library(String name, String address, int nFloors, boolean hasElevator) {
       super(name, address, nFloors);
       this.collection = new Hashtable<String, Boolean>();
@@ -45,7 +67,7 @@ public class Library extends Building {
   public void checkOut(String title){
     if (this.collection.get(title)) {
       this.collection.put(title, false);
-    }else{
+    } else {
       throw new RuntimeException(title + " is not in the library right now.");
     }
   }
@@ -94,6 +116,13 @@ public class Library extends Building {
     System.out.println(entireCollection);
   }
 
+  /**
+   * Allows user to move floors if in the building.
+   * @param floorNum The floor to go to. 
+   * @throws RuntimeException If the user is not in the building.
+   * @throws RuntimeException If the floor is not within the range of the building.
+   * @throws RuntimeException If the floor is not adjacent and the building does not have an elevator.
+   */
   public void goToFloor(int floorNum) {
     if (this.activeFloor == -1) {
         throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
@@ -105,19 +134,14 @@ public class Library extends Building {
         throw new RuntimeException("Cannot move to non-adjacent floor without an elevator.");
     }
       System.out.println("You are now on floor #" + floorNum + " of " + this.name);
-      this.activeFloor = floorNum;
-    
+      this.activeFloor = floorNum; 
   }
 
+  /**
+   * Prints out options for Library. 
+   */
   public void showOptions() {
     System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n) \n");
   }
 
-    public static void main(String[] args) {
-      Library lib = new Library("name", "address", 10, false);
-      lib.enter();
-      lib.goToFloor(4);
-      //lib.exit();
-    }
-
-  }
+}

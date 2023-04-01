@@ -9,6 +9,12 @@ public class House extends Building {
   private boolean hasDiningRoom;
   private boolean hasElevator;
 
+  /*Default constructor */
+  public House(){
+    this("<Name Unknown>", "<Address Unknown>", 1, false, false);
+  }
+
+  /* Full constructor */
   public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
     super(name, address, nFloors);
     this.residents = new ArrayList<String>();
@@ -16,13 +22,15 @@ public class House extends Building {
     this.hasElevator = hasElevator;
   }
 
+
+
   /**
    * Returns a string representing the house, including the number of residents and whether or not it has a dining room.
    * @return Returns a string representation of the house
    */
   public String toString(){
     String description = super.toString();
-    description += ". This house currently has " + this.residents.size() + " residents.";
+    description += " This house currently has " + this.residents.size() + " residents.";
     description += " It ";
     if (this.hasDiningRoom){
       description += "has";
@@ -63,6 +71,35 @@ public class House extends Building {
   }
 
   /**
+   * Moves in a resident with a given name and room type.
+   * @param name The name of the resident that is moving in
+   * @param roomNum The number of the room that the resident is moving into.
+   */
+  public void moveIn(String name, int roomNum) {
+    if (!isResident(name)) {
+        System.out.println("Added "+ name + " to room "+ roomNum + " in " + this.getName() + ".");
+        this.residents.add(name);
+    } else {
+        System.out.println(name + " is already in "+ this.getName());
+    }
+  }
+
+  /**
+   * Moves in a resident with a given name, room type, and year.
+   * @param name The name of the resident that is moving in.
+   * @param roomNum The number of the room that the resident is moving into.
+   * @param floorNum The floor that the resident is moving onto.
+   */
+  public void moveIn(String name, int roomNum, int floorNum) {
+    if (!isResident(name)) {
+        System.out.println("Added "+ name + " to room "+ roomNum + " on " + floorNum + " in " + this.getName() + ".");
+        this.residents.add(name);
+    } else {
+        System.out.println(name + " is already in "+ this.getName());
+    }
+  }
+
+  /**
    * Moves out a resident with a given name. 
    * @param name The name of the resident that is moving out
    * @return Returns the name of the resident
@@ -85,7 +122,13 @@ public class House extends Building {
     return this.residents.contains(person);
   }
 
-  
+  /**
+   * Allows user to move floors if in the building.
+   * @param floorNum The floor to go to. 
+   * @throws RuntimeException If the user is not in the building.
+   * @throws RuntimeException If the floor is not within the range of the building.
+   * @throws RuntimeException If the floor is not adjacent and the building does not have an elevator.
+   */
   public void goToFloor(int floorNum) {
     if (this.activeFloor == -1) {
         throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
@@ -98,26 +141,6 @@ public class House extends Building {
     }
       System.out.println("You are now on floor #" + floorNum + " of " + this.name);
       this.activeFloor = floorNum;
-    
-  }
-
-  public static void main(String[] args) {
-    House ziskind = new House("Ziskind", "1 Henshaw Ave", 3, true, true);
-    House capen = new House("Capen", "26 prospect st", 3, false, false);
-    System.out.println("------------------------------------");
-        System.out.println("Test of Building constructor/methods");
-        System.out.println("------------------------------------");
-      
-        System.out.println(capen);
-        capen.showOptions();
-
-        System.out.println("-----------------------------------");
-        System.out.println("Demonstrating enter/exit/navigation");
-        System.out.println("-----------------------------------");
-        capen.enter();
-        capen.goUp();
-        capen.goDown();
-        capen.exit();
   }
 
 }
