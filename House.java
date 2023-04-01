@@ -5,34 +5,32 @@ import java.util.ArrayList;
  */
 public class House extends Building {
 
-  private ArrayList<String> residents;
+  private ArrayList < String > residents;
   private boolean hasDiningRoom;
   private boolean hasElevator;
 
   /*Default constructor */
-  public House(){
+  public House() {
     this("<Name Unknown>", "<Address Unknown>", 1, false, false);
   }
 
   /* Full constructor */
   public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
     super(name, address, nFloors);
-    this.residents = new ArrayList<String>();
+    this.residents = new ArrayList < String > ();
     this.hasDiningRoom = hasDiningRoom;
     this.hasElevator = hasElevator;
   }
-
-
 
   /**
    * Returns a string representing the house, including the number of residents and whether or not it has a dining room.
    * @return Returns a string representation of the house
    */
-  public String toString(){
+  public String toString() {
     String description = super.toString();
     description += " This house currently has " + this.residents.size() + " residents.";
     description += " It ";
-    if (this.hasDiningRoom){
+    if (this.hasDiningRoom) {
       description += "has";
     } else {
       description += "does not have";
@@ -45,7 +43,7 @@ public class House extends Building {
    * Accessor for residents.
    * @return Return an arraylist of the residents of the house
    */
-  public ArrayList getResidents(){
+  public ArrayList getResidents() {
     return this.residents;
   }
 
@@ -53,7 +51,7 @@ public class House extends Building {
    * Accessor for hasDiningRoom
    * @return Returns true if the house has a dining room, otherwise returns false
    */
-  public boolean getHasDiningRoom(){
+  public boolean getHasDiningRoom() {
     return hasDiningRoom;
   }
 
@@ -61,12 +59,12 @@ public class House extends Building {
    * Moves in a resident with a given name.
    * @param name The name of the resident that is moving in
    */
-  public void moveIn(String name){
-    if (!isResident(name)){
-      System.out.println("Added "+ name + " to " + this.getName());
+  public void moveIn(String name) {
+    if (!isResident(name)) {
+      System.out.println("Added " + name + " to " + this.getName());
       this.residents.add(name);
     } else {
-      System.out.println(name + " is already in "+ this.getName());
+      System.out.println(name + " is already in " + this.getName());
     }
   }
 
@@ -77,10 +75,10 @@ public class House extends Building {
    */
   public void moveIn(String name, int roomNum) {
     if (!isResident(name)) {
-        System.out.println("Added "+ name + " to room "+ roomNum + " in " + this.getName() + ".");
-        this.residents.add(name);
+      System.out.println("Added " + name + " to room " + roomNum + " in " + this.getName() + ".");
+      this.residents.add(name);
     } else {
-        System.out.println(name + " is already in "+ this.getName());
+      System.out.println(name + " is already in " + this.getName());
     }
   }
 
@@ -92,10 +90,10 @@ public class House extends Building {
    */
   public void moveIn(String name, int roomNum, int floorNum) {
     if (!isResident(name)) {
-        System.out.println("Added "+ name + " to room "+ roomNum + " on " + floorNum + " in " + this.getName() + ".");
-        this.residents.add(name);
+      System.out.println("Added " + name + " to room " + roomNum + " on " + floorNum + " in " + this.getName() + ".");
+      this.residents.add(name);
     } else {
-        System.out.println(name + " is already in "+ this.getName());
+      System.out.println(name + " is already in " + this.getName());
     }
   }
 
@@ -104,11 +102,11 @@ public class House extends Building {
    * @param name The name of the resident that is moving out
    * @return Returns the name of the resident
    */
-  public String moveOut(String name){
-    if (isResident(name)){
+  public String moveOut(String name) {
+    if (isResident(name)) {
       this.residents.remove(name);
     } else {
-      System.out.println(name + " is not in "+ this.getName());
+      System.out.println(name + " is not in " + this.getName());
     }
     return name;
   }
@@ -118,7 +116,7 @@ public class House extends Building {
    * @param person The person to search for
    * @return True if the person is a resident, false otherwise
    */
-  public boolean isResident(String person){
+  public boolean isResident(String person) {
     return this.residents.contains(person);
   }
 
@@ -131,16 +129,16 @@ public class House extends Building {
    */
   public void goToFloor(int floorNum) {
     if (this.activeFloor == -1) {
-        throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
+      throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
     }
     if (floorNum < 1 || floorNum > this.nFloors) {
-        throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors +".");
-    } 
-    if ((this.activeFloor - 1) > floorNum || (this.activeFloor + 1) < floorNum && !this.hasElevator) {
-        throw new RuntimeException("Cannot move to non-adjacent floor without an elevator.");
+      throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors + ".");
     }
-      System.out.println("You are now on floor #" + floorNum + " of " + this.name);
-      this.activeFloor = floorNum;
+    if ((this.activeFloor - 1) > floorNum || (this.activeFloor + 1) < floorNum && !this.hasElevator) {
+      throw new RuntimeException("Cannot move to non-adjacent floor without an elevator.");
+    }
+    System.out.println("You are now on floor #" + floorNum + " of " + this.name);
+    this.activeFloor = floorNum;
   }
 
 }
