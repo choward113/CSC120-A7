@@ -12,6 +12,11 @@ public class Cafe extends Building {
     public Cafe() {
       this("<Name Unknown>", "<Address Unknown>", 1, 0, 0, 0, 0);
     }
+
+    /*Constructor with only name and address*/
+    public Cafe(String name, String address) {
+      this(name, address, 1, 0, 0, 0, 0);
+    }
   
     /* Full constructor */
     public Cafe(String name, String address, int nFloors, int nCoffeeOunces, int nSugarPackets, int nCreams, int nCups) {

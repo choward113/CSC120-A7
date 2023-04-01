@@ -52,18 +52,18 @@ public class CampusMap {
     public static void main(String[] args) {
         CampusMap myMap = new CampusMap();
         myMap.addBuilding(new Building("Ford Hall", "100 Green Street Northampton, MA 01063", 4));
-        myMap.addBuilding(new Building("Bass Hall", "4 Tyler Court Northampton, MA 01063", 4));
-        myMap.addBuilding(new Building("Tyler", "151 Green Street Northampton, MA 01063", 4));
-        myMap.addBuilding(new Building("Lawrence", "78 Green Street Northampton, MA 01063", 4));
-        myMap.addBuilding(new Building("Alumnae Gym", "83 Green Street Northampton, MA 01063", 4));
-        myMap.addBuilding(new Building("Sabin Reed", "44 College Ln, Northampton, MA 01063", 4));
-        myMap.addBuilding(new Building("Nielson Library", "7 Neilson Drive Northampton, MA 01063", 4));
-        myMap.addBuilding(new Building("Compass Cafe", "Neilson Library 7 Neilson Drive Northampton, MA 01063", 1));
+        myMap.addBuilding(new House("Lawrence", "78 Green Street Northampton, MA 01063", 4, true, false));
+        myMap.addBuilding(new Cafe("Compass Cafe", "Neilson Library 7 Neilson Drive Northampton, MA 01063"));
         myMap.addBuilding(new Building("Botanic Garden", "16 College Ln Northampton, MA 01063", 1));
         myMap.addBuilding(new Building("Seelye Hall", "2 Seelye Dr Northampton, MA 01060", 4));
         myMap.addBuilding(new Building("McConnell Hall", " 2 Tyler Ct Northampton, MA 01063", 4));
         myMap.addBuilding(new Building("Sage Hall", "144 Green St Northampton, MA 01063", 4));
-        myMap.addBuilding(new Building("Ziskind", "1 Henshaw Ave Northampton, MA 01063", 4));
+        myMap.addBuilding(new House("Ziskind", "1 Henshaw Ave Northampton, MA 01063", 4, true, true));
+        myMap.addBuilding(new Building("Alumnae Gym", "83 Green Street Northampton, MA 01063", 4));
+        myMap.addBuilding(new Building("Sabin Reed", "44 College Ln, Northampton, MA 01063", 4));
+        myMap.addBuilding(new Building("Nielson Library", "7 Neilson Drive Northampton, MA 01063", 4));
+        myMap.addBuilding(new Building("Bass Hall", "4 Tyler Court Northampton, MA 01063", 4));
+        myMap.addBuilding(new House("Tyler", "151 Green Street Northampton, MA 01063", 4, true, true));
         System.out.println(myMap);
     }
     
