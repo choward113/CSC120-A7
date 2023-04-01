@@ -50,9 +50,15 @@ If the Cafe does not have enough inventory, it attempts to restock and throws a 
         this.nCups += nCups;
     }
 
+    public void goToFloor(int floorNum){
+        throw new RuntimeException("Cannot move floors. The cafe only has one floor.");
+    }
+
+    public void showOptions() {
+        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + sellCoffee(coffee size, sugar packets, creams)");
+    }
     public static void main(String[] args) {
         Cafe cafe = new Cafe("Name", "Address", 1, 0,0,0,0);
-        cafe.sellCoffee(12, 4, 5);
     }
     
 }

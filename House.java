@@ -7,11 +7,13 @@ public class House extends Building {
 
   private ArrayList<String> residents;
   private boolean hasDiningRoom;
+  private boolean hasElevator;
 
-  public House(String name, String address, int nFloors, boolean hasDiningRoom) {
+  public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
     super(name, address, nFloors);
     this.residents = new ArrayList<String>();
     this.hasDiningRoom = hasDiningRoom;
+    this.hasElevator = hasElevator;
   }
 
   /**
@@ -83,9 +85,39 @@ public class House extends Building {
     return this.residents.contains(person);
   }
 
+  
+  public void goToFloor(int floorNum) {
+    if (this.activeFloor == -1) {
+        throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
+    }
+    if (floorNum < 1 || floorNum > this.nFloors) {
+        throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors +".");
+    } 
+    if ((this.activeFloor - 1) > floorNum || (this.activeFloor + 1) < floorNum && !this.hasElevator) {
+        throw new RuntimeException("Cannot move to non-adjacent floor without an elevator.");
+    }
+      System.out.println("You are now on floor #" + floorNum + " of " + this.name);
+      this.activeFloor = floorNum;
+    
+  }
+
   public static void main(String[] args) {
-    House ziskind = new House("Ziskind", "1 Henshaw Ave", 3, true);
-    House capen = new House("Capen", "26 prospect st", 3, false);
+    House ziskind = new House("Ziskind", "1 Henshaw Ave", 3, true, true);
+    House capen = new House("Capen", "26 prospect st", 3, false, false);
+    System.out.println("------------------------------------");
+        System.out.println("Test of Building constructor/methods");
+        System.out.println("------------------------------------");
+      
+        System.out.println(capen);
+        capen.showOptions();
+
+        System.out.println("-----------------------------------");
+        System.out.println("Demonstrating enter/exit/navigation");
+        System.out.println("-----------------------------------");
+        capen.enter();
+        capen.goUp();
+        capen.goDown();
+        capen.exit();
   }
 
 }

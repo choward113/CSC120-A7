@@ -6,11 +6,14 @@ import java.util.Enumeration;
 public class Library extends Building {
 
   private Hashtable<String, Boolean> collection;
+  private boolean hasElevator;
 
-    public Library(String name, String address, int nFloors) {
+  public Library(String name, String address, int nFloors, boolean hasElevator) {
       super(name, address, nFloors);
       this.collection = new Hashtable<String, Boolean>();
-    }
+      this.hasElevator = hasElevator;
+
+  }
   
   /**
    * Adds a book into the collection
@@ -91,8 +94,30 @@ public class Library extends Building {
     System.out.println(entireCollection);
   }
 
+  public void goToFloor(int floorNum) {
+    if (this.activeFloor == -1) {
+        throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
+    }
+    if (floorNum < 1 || floorNum > this.nFloors) {
+        throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors +".");
+    } 
+    if ((this.activeFloor - 1) > floorNum || (this.activeFloor + 1) < floorNum && !this.hasElevator) {
+        throw new RuntimeException("Cannot move to non-adjacent floor without an elevator.");
+    }
+      System.out.println("You are now on floor #" + floorNum + " of " + this.name);
+      this.activeFloor = floorNum;
+    
+  }
+
+  public void showOptions() {
+    System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n) \n");
+  }
+
     public static void main(String[] args) {
-      Library lib = new Library("name", "address", 2);
+      Library lib = new Library("name", "address", 10, false);
+      lib.enter();
+      lib.goToFloor(4);
+      //lib.exit();
     }
 
   }
