@@ -28,6 +28,21 @@ public class Cafe extends Building {
     }
   
     /** 
+     * Lets user get one cup of a standard coffee.
+     */
+    public void sellCoffee() {
+      if (this.nCoffeeOunces >= (nCups * 8) && this.nSugarPackets >= (nCups * 2) && this.nCreams >= (nCups * 2) && this.nCups >= 1) {
+        this.nCoffeeOunces -= (nCups * 8);
+        this.nSugarPackets -= (nCups * 2);
+        this.nCreams -= (nCups * 2);
+        this.nCups -= 1;
+      } else {
+        restock((nCups * 8), (nCups * 2), (nCups * 2), 10);
+        throw new RuntimeException("Don't have enough supply for your coffee.");
+      }
+    }
+
+    /** 
      * Lets user get one customized coffee.
      * @param size The size of the drink in coffee ounces
      * @param nSugarPackets The number of sugar packets to be used
@@ -46,35 +61,17 @@ public class Cafe extends Building {
     }
   
     /** 
-     * Lets user get multiple customized coffees.
+     * Sells a standard coffee with a custom size.
      * @param size The size of the drink in coffee ounces
-     * @param nSugarPackets The number of sugar packets to be used
-     * @param nCreams The number of nCreams to be used
-     * @param nCups The number of cups being used.
      */
-    public void sellCoffee(int size, int nSugarPackets, int nCreams, int nCups) {
-      if (this.nCoffeeOunces >= (nCups * size) && this.nSugarPackets >= (nCups * nSugarPackets) && this.nCreams >= (nCups * nCreams) && (this.nCups - nCups) >= 0) {
-        this.nCoffeeOunces -= (nCups * size);
-        this.nSugarPackets -= (nCups * nSugarPackets);
-        this.nCreams -= (nCups * nCreams);
-        this.nCups -= nCups;
-      } else {
-        restock(size, nSugarPackets, nCreams, 10);
-        throw new RuntimeException("Don't have enough supply for your coffee(s).");
-      }
-    }
-  
-    /** 
-     * Lets user get one cup of a standard coffee.
-     */
-    public void sellCoffee() {
-      if (this.nCoffeeOunces >= (nCups * 8) && this.nSugarPackets >= (nCups * 2) && this.nCreams >= (nCups * 2) && this.nCups >= 1) {
-        this.nCoffeeOunces -= (nCups * 8);
-        this.nSugarPackets -= (nCups * 2);
-        this.nCreams -= (nCups * 2);
+    public void sellCoffee(int size) {
+      if (this.nCoffeeOunces >= (size) && this.nSugarPackets >= 2 && this.nCreams >= 2 && (this.nCups - 1) >= 0) {
+        this.nCoffeeOunces -= size;
+        this.nSugarPackets -= 2;
+        this.nCreams -= 2;
         this.nCups -= 1;
       } else {
-        restock((nCups * 8), (nCups * 2), (nCups * 2), 10);
+        restock(size, nSugarPackets, nCreams, 10);
         throw new RuntimeException("Don't have enough supply for your coffee.");
       }
     }
