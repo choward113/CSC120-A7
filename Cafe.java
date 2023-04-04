@@ -28,9 +28,7 @@ public class Cafe extends Building {
     }
   
     /** 
-     *If the cafe has more than the specified amount of coffee, sugar, and cream, and more than one cup, 
-      then the specified amounts are removed from the cafe's inventory. 
-      If the Cafe does not have enough inventory, it attempts to restock and throws a RuntimeException.
+     * Lets user get one customized coffee.
      * @param size The size of the drink in coffee ounces
      * @param nSugarPackets The number of sugar packets to be used
      * @param nCreams The number of nCreams to be used
@@ -48,16 +46,14 @@ public class Cafe extends Building {
     }
   
     /** 
-     *If the cafe has more than the specified amount of coffee, sugar, and cream, and cups, 
-      then the specified amounts multiplied by the number of cups are removed from the cafe's inventory.
-      If the Cafe does not have enough inventory, it attempts to restock and throws a RuntimeException.
+     * Lets user get multiple customized coffees.
      * @param size The size of the drink in coffee ounces
      * @param nSugarPackets The number of sugar packets to be used
      * @param nCreams The number of nCreams to be used
      * @param nCups The number of cups being used.
      */
     public void sellCoffee(int size, int nSugarPackets, int nCreams, int nCups) {
-      if (this.nCoffeeOunces >= (nCups * size) && this.nSugarPackets >= (2 * nSugarPackets) && this.nCreams >= (2 * nCreams) && (this.nCups - nCups) >= 0) {
+      if (this.nCoffeeOunces >= (nCups * size) && this.nSugarPackets >= (nCups * nSugarPackets) && this.nCreams >= (nCups * nCreams) && (this.nCups - nCups) >= 0) {
         this.nCoffeeOunces -= (nCups * size);
         this.nSugarPackets -= (nCups * nSugarPackets);
         this.nCreams -= (nCups * nCreams);
@@ -69,17 +65,14 @@ public class Cafe extends Building {
     }
   
     /** 
-     *If the cafe has more than the specified amount of coffee, sugar, and cream, and more than one cup, 
-      then the specified amounts are removed from the cafe's inventory. 
-      If the Cafe does not have enough inventory, it attempts to restock and throws a RuntimeException.
-     * @param nCups
+     * Lets user get one cup of a standard coffee.
      */
-    public void sellCoffee(int nCups) {
-      if (this.nCoffeeOunces >= (nCups * 8) && this.nSugarPackets >= (nCups * 2) && this.nCreams >= (nCups * 2) && this.nCups >= nCups) {
+    public void sellCoffee() {
+      if (this.nCoffeeOunces >= (nCups * 8) && this.nSugarPackets >= (nCups * 2) && this.nCreams >= (nCups * 2) && this.nCups >= 1) {
         this.nCoffeeOunces -= (nCups * 8);
         this.nSugarPackets -= (nCups * 2);
         this.nCreams -= (nCups * 2);
-        this.nCups -= nCups;
+        this.nCups -= 1;
       } else {
         restock((nCups * 8), (nCups * 2), (nCups * 2), 10);
         throw new RuntimeException("Don't have enough supply for your coffee.");
