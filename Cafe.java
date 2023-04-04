@@ -104,7 +104,7 @@ public class Cafe extends Building {
      * Prints out options for the cafe. 
      */
     public void showOptions() {
-      System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + sellCoffee(coffee size, sugar packets, creams)");
+      System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + sellCoffee()");
     }
   
   }
