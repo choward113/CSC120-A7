@@ -141,4 +141,12 @@ public class House extends Building {
     this.activeFloor = floorNum;
   }
 
+  /**
+   * Prints out options for House. 
+   */
+  public void showOptions() {
+    super.showOptions();
+    System.out.print(" + moveIn() \n + moveOut()");
+  }
+
 }

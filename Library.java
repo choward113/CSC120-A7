@@ -141,7 +141,7 @@ public class Library extends Building {
    * Prints out options for Library. 
    */
   public void showOptions() {
-    System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n) \n");
+    System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n) \n + printCollection() \n + checkOut() \n + removeTitle() \n + returnBook() ");
   }
 
 }
